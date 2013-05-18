@@ -107,10 +107,6 @@ int OCVCapture::retry_ioctl(int request, void* argument)
 		// then try requesting new buffers, and retry
 		if ((result == -1) && (request == VIDIOC_DQBUF)) {
 
-		static int sleepTime = 175;
-		//sleepTime+=5;
-		cout << "sleepTime = " << sleepTime;
-
 			cout << 
 		"Trying to request new buffers to make the camera start "
 			<< endl;
@@ -132,8 +128,8 @@ int OCVCapture::retry_ioctl(int request, void* argument)
 			{
 			subresult = retry_ioctl(VIDIOC_REQBUFS, &request);
 			
-			usleep(sleepTime);
-			//cout << "\r   Try # " << (iters) << " of 2500" << flush;
+			//usleep(100);
+			cout << "\r   Try # " << (iters) << " of 2500" << flush;
 
 			}
 			while((subresult == -1) && (++iters < 2500));
@@ -323,7 +319,6 @@ bool OCVCapture::open()
 			cout << messageHeader << "frame rate " << m_final_frame_rate << " fps" << endl;
 		}
 	}
-	TryAgain: // #MD additional opens will loop through requesting buffers
 
 	// Request buffers.
 	struct v4l2_requestbuffers request;
@@ -341,9 +336,7 @@ bool OCVCapture::open()
 		{
 			reportError("could not map buffers");
 			close();
-			goto TryAgain;
-			continue;
-			//return false;
+			return false;
 		}
 		
 		// If the number of buffers returned is 0 try asking for a
