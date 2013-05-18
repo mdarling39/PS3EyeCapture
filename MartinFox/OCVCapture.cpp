@@ -485,7 +485,7 @@ bool OCVCapture::grab()
 			if (errno != EINTR)
 			{
 				reportError("error on select", errno);
-				status = kTrying;
+				status = kFailure;
 			}
 		}
 		/* #MD  Try and go directly to reading frames... It will eventually work if we keep hitting it
