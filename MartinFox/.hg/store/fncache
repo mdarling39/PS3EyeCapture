@@ -1,0 +1,5 @@
+data/OCVCapture.h.i
+data/OCVCapture.cpp.i
+data/COPYING.txt.i
+data/camera.cpp.i
+data/CMakeLists.txt.i
