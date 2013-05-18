@@ -1,0 +1,2 @@
+g++ pleaseWork.cpp OCVCapture_mod.cpp -o pleaseWork -I/usr/include -L/usr/lib -lopencv_core -lopencv_highgui -lv4l2
+
